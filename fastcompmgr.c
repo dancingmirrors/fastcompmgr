@@ -150,7 +150,7 @@ Bool clip_changed;
 #if HAS_NAME_WINDOW_PIXMAP
 Bool has_name_pixmap;
 #endif
-ringBuffer_typedef(ulong, IgnoreErrRingbuf);
+ringBuffer_typedef(unsigned long, IgnoreErrRingbuf);
 IgnoreErrRingbuf ignore_ringbuf;
 IgnoreErrRingbuf* p_ignore_ringbuf = &ignore_ringbuf;
 int xfixes_event, xfixes_error;
@@ -751,7 +751,7 @@ solid_picture(Display *dpy, Bool argb, double a,
 void
 discard_ignore(Display *dpy, unsigned long sequence) {
   while(! isBufferEmpty(p_ignore_ringbuf)){
-    ulong buf_seq;
+    unsigned long buf_seq;
     buf_seq = bufferReadPeek(p_ignore_ringbuf);
     if ((long) (sequence - buf_seq) > 0) {
       bufferReadSkip(p_ignore_ringbuf);
@@ -771,7 +771,7 @@ set_ignore(Display *dpy, unsigned long sequence) {
 
 int
 should_ignore(Display *dpy, unsigned long sequence) {
-  ulong buf_seq;
+  unsigned long buf_seq;
   discard_ignore(dpy, sequence);
   if(isBufferEmpty(p_ignore_ringbuf)) return False;
   buf_seq = bufferReadPeek(p_ignore_ringbuf);
@@ -2353,7 +2353,7 @@ main(int argc, char **argv) {
   int o;
   int longopt_idx;
   Bool no_dock_shadow = False;
-  bufferInit(ignore_ringbuf, 2048, ulong);
+  bufferInit(ignore_ringbuf, 2048, unsigned long);
 
   for (i = 0; i < NUM_WINTYPES; ++i) {
     win_type_fade[i] = False;
