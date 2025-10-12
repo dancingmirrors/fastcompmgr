@@ -3,7 +3,8 @@ LIBS = `pkg-config --libs ${PACKAGES}` -lm
 INCS = `pkg-config --cflags ${PACKAGES}`
 CFLAGS = -Wall -O3 -flto
 PREFIX = /usr/local
-MANDIR = ${PREFIX}/share/man/man1
+MANDIR = ${PREFIX}/man/man1
+CC = x86_64-unknown-openbsd-gcc-11.2.0
 
 OBJS=fastcompmgr.o comp_rect.o cm-root.o cm-global.o cm-util.o
 
@@ -15,9 +16,9 @@ fastcompmgr: $(OBJS)
 
 install: fastcompmgr
 	@mkdir -p "${PREFIX}/bin"
-	@gcp -t "${PREFIX}/bin" fastcompmgr
+	@cp fastcompmgr "${PREFIX}/bin"
 	@mkdir -p "${MANDIR}"
-	@gcp -t "${MANDIR}" fastcompmgr.1
+	@cp fastcompmgr.1 "${MANDIR}"
 
 uninstall:
 	@rm -f "${PREFIX}/bin/fastcompmgr"
