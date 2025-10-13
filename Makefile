@@ -4,7 +4,7 @@ INCS = `pkg-config --cflags ${PACKAGES}`
 CFLAGS = -Wall -O3 -flto
 PREFIX = /usr/local
 MANDIR = ${PREFIX}/man/man1
-CC = x86_64-unknown-openbsd-gcc-11.2.0
+CC = gcc
 
 OBJS=fastcompmgr.o comp_rect.o cm-root.o cm-global.o cm-util.o
 
